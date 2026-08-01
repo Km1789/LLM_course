@@ -15,11 +15,19 @@ class SimpleDataset(Dataset):
         self.input_ids = encode_text(tokenizer, text)
 
     def __len__(self):
+
+        # Убедимся, что у нас достаточно данных для создания полных пар (chunk, targets)
         return (len(self.input_ids) - self.max_length - 1) // self.stride + 1
 
     def __getitem__(self, idx):
         start_idx = idx * self.stride
         end_idx = start_idx + self.max_length
+
+        # Убедимся, что end_idx + 1 не выходит за пределы массива
+        if end_idx + 1 > len(self.input_ids):
+            # Если выходим за пределы, корректируем end_idx
+            end_idx = len(self.input_ids) - 1
+            start_idx = end_idx - self.max_length
 
         chunk = self.input_ids[start_idx:end_idx]
         targets = self.input_ids[start_idx + 1 : end_idx + 1]
