@@ -1,0 +1,9 @@
+{
+  "vocab_size": 50257,
+  "max_seq_length": 4,
+  "embed_dim": 64,
+  "num_heads": 2,
+  "num_layers": 2,
+  "ff_dim": 256,
+  "model_name": "gpt2"
+}
