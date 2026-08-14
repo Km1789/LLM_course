@@ -55,7 +55,7 @@ def generate(model, tokenizer, prompt, max_new_tokens=20,
             do_sample=do_sample,
             temperature=temperature,
             top_k=top_k,
-            top_p=top_p,
+            # top_p=top_p,
         )
 
         # Добавляем его к последовательности
